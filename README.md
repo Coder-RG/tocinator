@@ -1,18 +1,51 @@
 # TOCinator
 
-[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![MIT license](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-This should probably work
+This python module parses your Markdown file and generates a Table of Content(TOC)
+for that file. It should be noted that this is still in development and may not
+always function as expected.
 
-## Heading1
-- Point1
-- Point2
+**The TOC below was completely generated using this module.**
 
-### Subhead1
-some more text.
+## Table of Content
+1. [Features of this module](#features-of-this-module)
+2. [Code Generated using tocinator](#code-generated-using-tocinator)
+3. [Rendered Code](#rendered-code)
+4. [How to use this module](#how-to-use-this-module)
+   1. [What not to do](#what-not-to-do)
+5. [General Layout](#general-layout)
 
-## Heading2
-- Point1
-- Point2
+## Features of this module
+1. Generate Markdown-ready code.
+2. Generated TOC has links to the actual headings and subheading. Which means you
+can just paste the generated code in you README file and click on any of the links
+to go to the desired heading.
 
-## Heading3
+## Code Generated using tocinator
+Below is an example of TOC generated using tocinator.
+The README used in the below snippets is from my [other][1] repository.
+Do check it out if you code in C, it might be of your interest.
+![Code](images/ss1.png)
+
+## Rendered Code
+![Render](images/ss2.png)
+
+## How to use this module
+1. Use `##` for headings
+2. Use `###` for subheadings.
+
+### What not to do
+1. `#` and `####` are not used in the parsing yet and therefore won't be
+displayed in the TOC.
+2. Only use alphanumeric for heading and subheadings.
+
+## General Layout
+![Code](images/ss4.png)
+
+![Render](images/ss3.png)
+
+Code is rendered using grip module. Do check out [grip][2] if you want to render your markdown files in your browser.
+
+[1]: https://github.com/Coder-RG/compc
+[2]: https://pypi.org/project/grip/

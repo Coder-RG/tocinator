@@ -4,53 +4,78 @@ import re
 import sys
 
 class FilePathMissing(Exception):
+    """Custom Exception class for missing command line arguments"""
     __module__ = "tocinator"
+    def __init__(self):
+        self.message = "Some command line arguments missing"
+        super().__init__(self.message)
 
-def parser(file):
-    title = r"^(#) (.*)$"
-    chapter = r"^(##) (.*)$"
-    subchapter = r"^(###) (.*)$"
+class tocinator():
+    """
+    The main class that contains all the necessary functions
+    for the functioning of this module. This will parse input
+    Markdown(.md) file and generate an output Markdown file.
+    You can just copy-paste the generated code and it should
+    perform as expected.
 
-    title_pattern = re.compile(title)
-    chapter_pattern = re.compile(chapter)
-    subchapter_pattern = re.compile(subchapter)
+    Usage: python3 main.py <input-file> <output-file>
 
-    dct = dict()
-    with open(file, "r") as f:
-        read_line = f.readline()
-        while read_line:
-            res2 = chapter_pattern.match(read_line)
-            res3 = subchapter_pattern.match(read_line)
-            if res2:
-                head = res2.group(2)
-            if res2:
-                dct[res2.group(2)] = list()
-            elif res3:
-                dct[head].append(res3.group(2))
+    """
+    def __init__(self, ifile, ofile):
+        self.ifile = ifile
+        self.ofile = ofile
+
+    def parse(self):
+        title = r"^(#) (.*)$"
+        chapter = r"^(##) (.*)$"
+        subchapter = r"^(###) (.*)$"
+
+        title_pattern = re.compile(title)
+        chapter_pattern = re.compile(chapter)
+        subchapter_pattern = re.compile(subchapter)
+
+        dct = dict()
+        with open(self.ifile, "r") as f:
             read_line = f.readline()
-    return dct
+            while read_line:
+                res2 = chapter_pattern.match(read_line)
+                res3 = subchapter_pattern.match(read_line)
+                if res2:
+                    head = res2.group(2)
+                    dct[head] = list()
+                elif res3:
+                    dct[head].append(res3.group(2))
+                read_line = f.readline()
+        return self.toc(dct)
 
-def toc(dct):
-    if len(dct) == 0:
-        return -1
-    else:
-        for x,y in dct.items():
-            print(x, end="\n\t")
-            print(*y, sep="\n\t")
-    with open("TEST2.md", "w") as f:
-        f.write("## Table of Content\n")
-        i_out = 1
-        for head,subhead in dct.items():
-            f.write("{} [{}](README.md)\n".format(str(i_out)+".", head))
-            i_in = 1
-            for sub in subhead:
-                f.write("   {} [{}](README.md)\n".format(str(i_in)+".", sub))
-                i_in += 1
-            f.write("\n")
-            i_out += 1
+    def toc(self, dct):
+        if len(dct) == 0:
+            return 1
+        else:
+            for x,y in dct.items():
+                print(x, end="\n\t")
+                print(*y, sep="\n\t")
+        with open(self.ofile, "w") as f:
+            f.write("## Table of Content\n")
+            i_out = 1
+            for head,subhead in dct.items():
+                ref = self.head_to_ref(head)
+                f.write("{} [{}](#{})\n".format(str(i_out)+".", head, ref))
+                i_in = 1
+                for sub in subhead:
+                    subref = self.head_to_ref(sub)
+                    f.write("   {} [{}](#{})\n".format(str(i_in)+".", sub, subref))
+                    i_in += 1
+                i_out += 1
+        return 0
+
+    def head_to_ref(self, string):
+        return string.lower().replace(" ", "-")
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        raise FilePathMissing("File path missing as command line argument.")
-    file = sys.argv[1]
-    sys.exit(toc(parser(file)))
+    if len(sys.argv) < 3:
+        raise FilePathMissing()
+    infile = sys.argv[1]
+    outfile = sys.argv[2]
+    script = tocinator(infile, outfile)
+    sys.exit(script.parse())
