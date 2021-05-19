@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import re
 import sys
 
@@ -16,7 +18,6 @@ def parser(file):
     dct = dict()
     with open(file, "r") as f:
         read_line = f.readline()
-        # res1 = title_pattern.match(read_line)
         while read_line:
             res2 = chapter_pattern.match(read_line)
             res3 = subchapter_pattern.match(read_line)
@@ -29,11 +30,27 @@ def parser(file):
             read_line = f.readline()
     return dct
 
+def toc(dct):
+    if len(dct) == 0:
+        return -1
+    else:
+        for x,y in dct.items():
+            print(x, end="\n\t")
+            print(*y, sep="\n\t")
+    with open("TEST2.md", "w") as f:
+        f.write("## Table of Content\n")
+        i_out = 1
+        for head,subhead in dct.items():
+            f.write("{} [{}](README.md)\n".format(str(i_out)+".", head))
+            i_in = 1
+            for sub in subhead:
+                f.write("   {} [{}](README.md)\n".format(str(i_in)+".", sub))
+                i_in += 1
+            f.write("\n")
+            i_out += 1
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         raise FilePathMissing("File path missing as command line argument.")
     file = sys.argv[1]
-    for x,y in parser(file).items():
-        print(x, end=": ")
-        print(*y, sep=", ")
+    sys.exit(toc(parser(file)))
