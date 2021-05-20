@@ -34,7 +34,30 @@ Do check it out if you code in C, it might be of your interest.
 ## How to use this module
 1. Use `##` for headings
 2. Use `###` for subheadings.
+3. Clone this repo.
+4. Change directory to cloned repo.
+```bash
+$ cd docinator
+```
+5. Run the file at command line:
+```bash
+$ python3 main.py <input-file> <output-file>
+```
 
+**Example 1:**
+```bash
+python3 main.py README.md OUT.md
+```
+
+If the .md file is in another folder, then use absolute path.
+```bash
+$ python3 main.py <path-to-folder>/README.md <path-to-folder>/TEST.md
+```
+
+**Example 2:**
+```bash
+python3 main.py /home/username/project/README.md /home/username/project/OUT.md
+```
 ### What not to do
 1. `#` and `####` are not used in the parsing yet and therefore won't be
 displayed in the TOC.
