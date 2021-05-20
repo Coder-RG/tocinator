@@ -72,10 +72,13 @@ class tocinator():
     def head_to_ref(self, string):
         return string.lower().replace(" ", "-")
 
-if __name__ == "__main__":
+def main():
     if len(sys.argv) < 3:
         raise FilePathMissing()
     infile = sys.argv[1]
     outfile = sys.argv[2]
     script = tocinator(infile, outfile)
     sys.exit(script.parse())
+
+if __name__ == "__main__":
+    main()
