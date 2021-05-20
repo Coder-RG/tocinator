@@ -26,10 +26,10 @@ to go to the desired heading.
 Below is an example of TOC generated using tocinator.
 The README used in the below snippets is from my [other][1] repository.
 Do check it out if you code in C, it might be of your interest.
-![Code](images/ss1.png)
+![Code](https://raw.githubusercontent.com/Coder-RG/tocinator/master/images/ss1.png)
 
 ## Rendered Code
-![Render](images/ss2.png)
+![Render](https://raw.githubusercontent.com/Coder-RG/tocinator/master/images/ss2.png)
 
 ## How to use this module
 1. Use `##` for headings
@@ -64,9 +64,9 @@ displayed in the TOC.
 2. Only use alphanumeric for heading and subheadings.
 
 ## General Layout
-![Code](images/ss4.png)
+![Code](https://raw.githubusercontent.com/Coder-RG/tocinator/master/images/ss4.png)
 
-![Render](images/ss3.png)
+![Render](https://raw.githubusercontent.com/Coder-RG/tocinator/master/images/ss3.png)
 
 Code is rendered using grip module. Do check out [grip][2] if you want to render your markdown files in your browser.
 
