@@ -1,6 +1,6 @@
 # TOCinator
 
-[![MIT license](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![MIT license](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE) [![GitHub tag](https://img.shields.io/github/tag/Coder-RG/tocinator.svg)](https://GitHub.com/Coder-RG/tocinator/tags/)
 
 This python module parses your Markdown file and generates a Table of Content(TOC)
 for that file. It should be noted that this is still in development and may not
