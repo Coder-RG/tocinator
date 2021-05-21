@@ -7,7 +7,8 @@ class FilePathMissing(Exception):
     """Custom Exception class for missing command line arguments"""
     __module__ = "tocinator"
     def __init__(self):
-        self.message = "Some command line arguments missing"
+        self.message = ("\033[31mError:\033[0m Some command line arguments missing\n"
+        "Usage: python3 -m tocinator <input-file> <output-file>")
         super().__init__(self.message)
 
 class tocinator():
@@ -73,8 +74,12 @@ class tocinator():
         return string.lower().replace(" ", "-")
 
 def main():
-    if len(sys.argv) < 3:
-        raise FilePathMissing()
+    try:
+        if len(sys.argv) < 3:
+            raise FilePathMissing()
+    except FilePathMissing as e:
+        print(e.message)
+        sys.exit(1)
     infile = sys.argv[1]
     outfile = sys.argv[2]
     script = tocinator(infile, outfile)

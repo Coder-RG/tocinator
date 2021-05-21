@@ -1,6 +1,6 @@
 # TOCinator
 
-[![MIT license](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE) [![GitHub tag](https://img.shields.io/github/tag/Coder-RG/tocinator.svg)](https://GitHub.com/Coder-RG/tocinator/tags/)
+[![MIT license](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE) [![Py version](https://img.shields.io/pypi/pyversions/tocinator)](https://pypi.org/project/tocinator/1.0.0/) [![GitHub tag](https://img.shields.io/github/tag/Coder-RG/tocinator.svg)](https://GitHub.com/Coder-RG/tocinator/tags/)
 
 This python module parses your Markdown file and generates a Table of Content(TOC)
 for that file. It should be noted that this is still in development and may not
@@ -34,6 +34,13 @@ Do check it out if you code in C, it might be of your interest.
 ## How to use this module
 1. Use `##` for headings
 2. Use `###` for subheadings.
+
+**With pip**
+```bash
+$ pip install tocinator
+```
+
+**Without pip**
 3. Clone this repo.
 4. Change directory to cloned repo.
 ```bash
@@ -41,27 +48,31 @@ $ cd tocinator
 ```
 5. Run the file at command line:
 ```bash
-$ python3 main.py <input-file> <output-file>
+$ python3 src/tocinator/tocinator.py <input-file> <output-file>
+```
+**Example 1: (if installed using pip)**
+```bash
+$ python3 -m tocinator README.md OUT.md
 ```
 
-**Example 1:**
+**Example 2: (if not installed with pip)**
 ```bash
-python3 main.py README.md OUT.md
+$ python3 src/tocinator/tocinator.py README.md OUT.md
 ```
 
 If the .md file is in another folder, then use absolute path.
 ```bash
-$ python3 main.py <path-to-folder>/README.md <path-to-folder>/TEST.md
+$ python3 src/tocinator/tocinator.py <path-to-folder>/README.md <path-to-folder>/TEST.md
 ```
 
-**Example 2:**
+**Example 3:**
 ```bash
-python3 main.py /home/username/project/README.md /home/username/project/OUT.md
+$ python3 sr/tocinator/tocinator.py /home/username/project/README.md /home/username/project/OUT.md
 ```
 ### What not to do
 1. `#` and `####` are not used in the parsing yet and therefore won't be
 displayed in the TOC.
-2. Only use alphanumeric for heading and subheadings.
+2. Only use alphanumeric for heading and subheadings. Otherwise, the links won't work.
 
 ## General Layout
 ![Code](https://raw.githubusercontent.com/Coder-RG/tocinator/master/images/ss4.png)

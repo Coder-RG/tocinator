@@ -1,6 +1,3 @@
-from tocinator import tocinator, main
-from tocinator import FilePathMissing
+__name__ = "tocinator"
 
-__name__ = tocinator
-
-__all__ = ["tocinator", "main", "FilePathMissing"]
+__version__ = "0.0.8"
