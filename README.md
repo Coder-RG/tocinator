@@ -37,7 +37,7 @@ Do check it out if you code in C, it might be of your interest.
 3. Clone this repo.
 4. Change directory to cloned repo.
 ```bash
-$ cd docinator
+$ cd tocinator
 ```
 5. Run the file at command line:
 ```bash
