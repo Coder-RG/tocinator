@@ -19,7 +19,7 @@ class tocinator():
     You can just copy-paste the generated code and it should
     perform as expected.
 
-    Usage: python3 main.py <input-file> <output-file>
+    Usage: python3 -m tocinator <input-file> <output-file>
 
     """
     def __init__(self, ifile, ofile):
