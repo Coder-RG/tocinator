@@ -27,11 +27,11 @@ class tocinator():
         self.ofile = ofile
 
     def parse(self):
-        title = r"^(#) (.*)$"
-        chapter = r"^(##) (.*)$"
+        # title = r"^(#) (.*)$"
+        chapter = r"^(##) \[(.*)\].*$"
         subchapter = r"^(###) (.*)$"
 
-        title_pattern = re.compile(title)
+        # title_pattern = re.compile(title)
         chapter_pattern = re.compile(chapter)
         subchapter_pattern = re.compile(subchapter)
 
