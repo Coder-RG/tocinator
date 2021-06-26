@@ -27,11 +27,9 @@ class tocinator():
         self.ofile = ofile
 
     def parse(self):
-        title = r"^(#) (.*)$"
-        chapter = r"^(##) (.*)$"
-        subchapter = r"^(###) (.*)$"
+        chapter = r"^## (\[(.*?)\]|(.*))(.*)$"
+        subchapter = r"^### (\[(.*?)\]|(.*))(.*)$"
 
-        title_pattern = re.compile(title)
         chapter_pattern = re.compile(chapter)
         subchapter_pattern = re.compile(subchapter)
 
@@ -42,10 +40,11 @@ class tocinator():
                 res2 = chapter_pattern.match(read_line)
                 res3 = subchapter_pattern.match(read_line)
                 if res2:
-                    head = res2.group(2)
+                    head = res2.group(2) if res2.group(2) else res2.group(3)
                     dct[head] = list()
                 elif res3:
-                    dct[head].append(res3.group(2))
+                    subhead = res3.group(2) if res3.group(2) else res3.group(3)
+                    dct[head].append(subhead)
                 read_line = f.readline()
         return self.toc(dct)
 
@@ -53,21 +52,21 @@ class tocinator():
         if len(dct) == 0:
             return 1
         else:
-            for x,y in dct.items():
-                print(x, end="\n\t")
-                print(*y, sep="\n\t")
-        with open(self.ofile, "w") as f:
-            f.write("## Table of Content\n")
-            i_out = 1
-            for head,subhead in dct.items():
-                ref = self.head_to_ref(head)
-                f.write("{} [{}](#{})\n".format(str(i_out)+".", head, ref))
-                i_in = 1
-                for sub in subhead:
-                    subref = self.head_to_ref(sub)
-                    f.write("   {} [{}](#{})\n".format(str(i_in)+".", sub, subref))
-                    i_in += 1
-                i_out += 1
+            # for x,y in dct.items():
+            #     print(x, end="\n\t")
+            #     print(*y, sep="\n\t")
+            with open(self.ofile, "w") as f:
+                f.write("## Table of Content\n")
+                i_out = 1
+                for head,subhead in dct.items():
+                    ref = self.head_to_ref(head)
+                    f.write("{} [{}](#{})\n".format(str(i_out)+".", head, ref))
+                    i_in = 1
+                    for sub in subhead:
+                        subref = self.head_to_ref(sub)
+                        f.write("   {} [{}](#{})\n".format(str(i_in)+".", sub, subref))
+                        i_in += 1
+                    i_out += 1
         return 0
 
     def head_to_ref(self, string):
