@@ -49,14 +49,6 @@ class tocinator():
                 read_line = f.readline()
         return self.toc(dct)
 
-    def anchors(self, header):
-        extras = "!@#$%^&*()?-_"
-        header = list(header)
-        for index,i in enumerate(header):
-            if i in extras:
-                del header[index]
-        return "-".join(header)
-
     def toc(self, dct):
         if len(dct) == 0:
             return 1
@@ -77,6 +69,14 @@ class tocinator():
                     i_in += 1
                 i_out += 1
         return 0
+    
+    def anchors(self, header):
+        extras = "!@#$%^&*()?-_"
+        header = list(header)
+        for index,i in enumerate(header):
+            if i in extras:
+                del header[index]
+        return "-".join(header)
 
     def head_to_ref(self, string):
         return string.lower().replace(" ", "-")
