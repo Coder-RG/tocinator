@@ -51,26 +51,32 @@ class tocinator():
     def toc(self, dct):
         if len(dct) == 0:
             return 1
-        else:
-            # for x,y in dct.items():
-            #     print(x, end="\n\t")
-            #     print(*y, sep="\n\t")
-            with open(self.ofile, "w") as f:
-                f.write("## Table of Content\n")
-                i_out = 1
-                for head,subhead in dct.items():
-                    ref = self.head_to_ref(head)
-                    f.write("{} [{}](#{})\n".format(str(i_out)+".", head, ref))
-                    i_in = 1
-                    for sub in subhead:
-                        subref = self.head_to_ref(sub)
-                        f.write("   {} [{}](#{})\n".format(str(i_in)+".", sub, subref))
-                        i_in += 1
-                    i_out += 1
+        # for x,y in dct.items():
+        #     print(x, end="\n\t")
+        #     print(*y, sep="\n\t")
+        with open(self.ofile, "w") as f:
+            f.write("## Table of Content\n")
+            i_out = 1
+            for head,subhead in dct.items():
+                ref = self.anchors(head)
+                f.write("{} [{}](#{})\n".format(str(i_out)+".", head, ref))
+                i_in = 1
+                for sub in subhead:
+                    subref = self.anchors(sub)
+                    f.write("   {} [{}](#{})\n".format(str(i_in)+".", sub, subref))
+                    i_in += 1
+                i_out += 1
         return 0
 
-    def head_to_ref(self, string):
-        return string.lower().replace(" ", "-")
+    def anchors(self, string):
+        p = r"\W+"
+        result = re.split(p, string)
+        for index,i in enumerate(result):
+            if i == '':
+                del result[index]
+            else:
+                result[index] = i.lower()
+        return '-'.join(result)
 
 def main():
     try:
